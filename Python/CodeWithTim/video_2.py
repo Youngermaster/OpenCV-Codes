@@ -18,10 +18,14 @@ Channels
 """
 print(img.shape)
 
-# 
+# Gives Random color values to the first 300 rows
 for i in range(300):
     for j in range(img.shape[1]):
         img[i][j] = [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
+
+
+tag = img[500:700, 600:900]
+img[800:1000, 650:950] = tag
 
 img = cv2.resize(img, (0, 0), fx=0.2, fy=0.2) # Scales by a 0.2x factor.
 
