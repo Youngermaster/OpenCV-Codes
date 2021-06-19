@@ -13,7 +13,8 @@ int main(int argc, char** argv) {
         printf("No image data \n");
         return -1;
     }
-    namedWindow("Display Image", WINDOW_AUTOSIZE);
+    // namedWindow("Display Image", WINDOW_AUTOSIZE);
+    namedWindow("Display Image", 320);
     imshow("Display Image", image);
     waitKey(0);
     return 0;
