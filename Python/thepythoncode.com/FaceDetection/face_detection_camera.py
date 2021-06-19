@@ -9,6 +9,11 @@ face_cascade = cv2.CascadeClassifier(
 eye_cascade = cv2.CascadeClassifier(
     "cascades/haarcascade_eye.xml")
 
+fps = cap.get(cv2.CAP_PROP_FPS)
+
+print(
+    "Frames per second using video.get(cv2.CAP_PROP_FPS) : {0}".format(fps))
+
 while True:
     # read the image from the cam
     _, image = cap.read()
@@ -26,6 +31,10 @@ while True:
     for x, y, width, height in eyes:
         cv2.rectangle(image, (x, y), (x + width, y + height),
                       color=(0, 255, 0), thickness=1)
+    fps = cap.get(cv2.CAP_PROP_FPS)
+
+    print(
+        "Frames per second using video.get(cv2.CAP_PROP_FPS) : {0}".format(fps))
 
     cv2.imshow("image", image)
     if cv2.waitKey(1) == ord("q"):
