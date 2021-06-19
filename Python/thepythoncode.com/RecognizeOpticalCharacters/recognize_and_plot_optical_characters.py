@@ -1,3 +1,4 @@
+from re import split
 import pytesseract
 import cv2
 import matplotlib.pyplot as plt
@@ -5,24 +6,40 @@ from PIL import Image
 
 # read the image using OpenCV
 image = cv2.imread("test.png")
+# * Another example to use:
+# image = cv2.imread("test_2.png")
 # or you can use Pillow
 # image = Image.open("test.png")
 
 # get the string
 string = pytesseract.image_to_string(image)
-# print it
-print(string)
 
 # make a copy of this image to draw in
 image_copy = image.copy()
 # the target word to search for
 target_word = "dog"
+# * Another example to use:
+# target_word = "quarter"
+
 # get all data from the image
 data = pytesseract.image_to_data(image, output_type=pytesseract.Output.DICT)
 
 # get all occurences of the that word
+# * Note: The code splits the word to error due to the code links the word with ',', '.' or ';'
+# *       so we only use the word and not the those
 word_occurences = [i for i, word in enumerate(
-    data["text"]) if word.lower() == target_word]
+    data["text"]) if word.lower().split('.')[0] == target_word
+    or word.lower().split(',')[0] == target_word
+    or word.lower().split(';')[0] == target_word]
+
+# ! You can delete this prints if you want
+print("[DEBUG INFO]:")
+# print it
+print(string)
+print(data)
+print(target_word)
+print("=============")
+print(word_occurences)
 
 for occ in word_occurences:
     # extract the width, height, top and left position for that detected word
